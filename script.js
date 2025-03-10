@@ -1,18 +1,57 @@
 const container = document.querySelector(".container");
 const head = document.querySelector(".head");
 
-
-
-
 let tailleGrille = 16;
 let nombreCase = tailleGrille * tailleGrille;
 
-for (let i = 0; i < nombreCase; i++) {
 
-    const square = document.createElement("div");
-    square.classList.add("square");
-    container.appendChild(square);
-}
+const change = document.getElementById("change");
+
+const changeButton = document.getElementById("change");
+changeButton.addEventListener("click", () => {
+  let  choix = parseInt(prompt("Entrez le nombre de carrés souhaité (max. 40) :"))
+
+  if (isNaN(choix) || choix <= 0 || choix > 40) {
+    alert("Veuillez entrer un nombre valide entre 1 et 40.");
+    return;
+  }
+
+  else {
+      tailleGrille = choix;
+    nombreCase = tailleGrille * tailleGrille;
+    grille();
+  }
+
+});
+
+
+
+
+const grille = () => {
+
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+
+      const tailleCarre = container.offsetWidth / tailleGrille;
+
+    for (let i = 0; i < nombreCase; i++) {
+      const square = document.createElement("div");
+      square.classList.add("square");
+
+      square.style.width = `${tailleCarre}px`; 
+      square.style.height = `${tailleCarre}px`; 
+
+      
+
+      square.addEventListener("mousemove", (e) => {
+        e.target.style.backgroundColor = couleurRandom();
+      });
+  
+      container.appendChild(square);
+    }
+  };
+
 
 
 const couleurs = ["green", "blue", "red", "orange", "purple", "magenta", "yellow"];
@@ -22,14 +61,6 @@ const couleurRandom = () => {
     return couleurs[randomIndex];
 }
 
-const squares = document.querySelectorAll(".square");
-
-squares.forEach((square) => {
-square.addEventListener("mousemove", (e) => {
-
-    e.target.style.backgroundColor = couleurRandom();
-})
-});
 
 const reset = document.getElementById("reset");
 
@@ -40,6 +71,8 @@ resetButton.addEventListener("click", () => {
   });
 });
 
+
+grille();
 
 
 console.log(couleurRandom());
