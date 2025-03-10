@@ -1,30 +1,18 @@
 const container = document.querySelector(".container");
 
-const square = document.createElement("canvas");
-
-square.width = 600;  
-square.height = square.width;
-container.appendChild(square);
-
-context = square.getContext("2d");
-context.lineWidth = 2;
 
 let tailleGrille = 16;
-let tailleCase = square.width / tailleGrille;
+let nombreCase = tailleGrille * tailleGrille;
 
+for (let i = 0; i < nombreCase; i++) {
 
-
-for (let i = 0; i < tailleGrille; i++) {
-    for (let j = 0; j < tailleGrille; j++) {
-        context.strokeRect(i * tailleCase, j * tailleCase, tailleCase, tailleCase);
-    }
-
-
+    const square = document.createElement("div");
+    square.classList.add("square");
+    container.appendChild(square);
 }
 
+
 const couleurs = ["green", "blue", "red", "orange", "purple", "magenta", "yellow"];
-
-
 const couleurRandom = () => {
 
     const randomIndex = Math.floor(Math.random() * couleurs.length);
