@@ -1,4 +1,7 @@
 const container = document.querySelector(".container");
+const head = document.querySelector(".head");
+
+
 
 
 let tailleGrille = 16;
@@ -27,6 +30,17 @@ square.addEventListener("mousemove", (e) => {
     e.target.style.backgroundColor = couleurRandom();
 })
 });
+
+const reset = document.getElementById("reset");
+
+const resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", () => {
+  document.querySelectorAll(".square").forEach((square) => {
+    square.style.backgroundColor = "white";
+  });
+});
+
+
 
 console.log(couleurRandom());
 
